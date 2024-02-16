@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>YiCloud-Save Everyhing</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+
+</style>
+
+<body>
+    <div id="title">
+    <b><h1 style='color:aliceblue; font-size: 30px; margin-left: 50px;'>
+        <img src="../static/2.png" style="height: 40px; width: 40px;">
+        <span>
+            YiCloud
+        </span>
+        <span style="color: aliceblue; margin-left: 900px;">欢迎您！<span style="color: rgb(102, 255, 0)">{{ username }}</span></span>
+       <form action="/logout" method="post" class="logout-form">
+           <button class="niceButton3">退出登录</button>
+       </form>
+    </h1></b>
+    </div>
+    <hr>
+    <br>
+    <div class="main">
+        <form id="uploadForm" action="/dashboard/upload" method="post" enctype="multipart/form-data">
+            <!-- 可见的文件选择框 -->
+            <input type="file" id="fileInput" name="file" style="display: none">
+            <button type="button" class="uploadButton" onclick="document.getElementById('fileInput').click()">  <!-- 点击按钮时触发文件选择 -->
+                <img src="../static/1.svg">
+                上传文件
+            </button>
+        </form>
+        <hr>
+        <br>
+        <h1 style="font-size: 28px; color: rgb(255, 255, 255);">我的文件</h1>
+        <ul id="fileList" style="font-size: 25px;"></ul>
+        <div id="pagination" style="font-size: 20px; margin-left: 1200px;"></div>
+    </div>
+</body>
+<script>
+    // 上传文件
+    const fileInput = document.getElementById('fileInput');
+    const uploadForm = document.getElementById('uploadForm');
+
+    fileInput.addEventListener('change', () => { //触发change事件后，读取用户选择的第一个文件
+        const file = fileInput.files[0];
+
+        if (file) {
+            const formData = new FormData(); 
+            formData.append('file', file); // 以键值对形式写入formData变量中
+
+            fetch('/dashboard/upload', { // 调用fetchAPI向指定的URL'/dashboard/upload'发送POST请求
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 文件上传成功，弹出提示框
+                    alert("文件上传成功！");
+                    // 刷新页面显示新文件
+                    location.reload();
+                } else {
+                    // 文件上传失败，弹出错误消息
+                    alert("文件上传失败，请重试！");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert("发生错误，请稍后再试！");
+            });
+        }
+    });
+
+    // // 读取不同用户文件夹中的文件
+    // fetch('/dashboard/files')
+    // .then(response => response.json())
+    // .then(data => {
+    //     const fileList = document.getElementById('fileList'); // 获取页面中 id 为fileList的ul元素，将其内容清空
+    //     fileList.innerHTML = ''; // 清空原有内容
+
+    //     if (data.files.length > 0) {  // 如果获得的文件列表存在文件
+    //         data.files.forEach(file => { // 遍历其中的所有文件
+    //             const li = document.createElement('li'); // 每个文件创建一个li元素
+    //             const a = document.createElement('a'); // 创建一个超链接a元素
+    //             a.textContent = file; // 将文件名作为超链接的文本内容
+    //             a.href = `/dashboard/download/${file}`;
+    //             li.appendChild(a); // 将超链接a添加到a元素中
+    //             fileList.appendChild(li); // 将li添加到ul，显示文件列表
+    //         });
+    //     } else {
+    //         const li = document.createElement('li');
+    //         li.textContent = '文件列表为空！';
+    //         fileList.appendChild(li);
+    //     }
+    // })
+    // .catch(error => {
+    //     console.error(error);
+    //     alert('无法获取文件，请重试！');
+    // });
+
+    // 分页处理，监听分页按钮
+    window.addEventListener('DOMContentLoaded', () => {
+        const fileList = document.getElementById('fileList');
+        const pagination = document.getElementById('pagination');
+
+        function loadFiles(page) {
+            fetch(`/dashboard/getfiles?page=${page}`)
+            .then(response => response.json())
+            .then(data => {
+                fileList.innerHTML = '' //清空文件列表，确保不会重复显示文件或出现内容重叠的情况
+
+                // 遍历文件数组
+                data.files.forEach(file => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.textContent = file.filename;
+                    a.href = file.download_link;
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = '删除';
+                    deleteButton.className = 'deleteButton';
+                    deleteButton.addEventListener('click', () => {
+                        fetch(`/dashboard/delete/${file.filename}`, {
+                            method: 'DELETE'
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('文件删除成功！');
+                                loadFiles(currentPage);
+                            } else {
+                                alert('文件删除失败，请重试！');
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            alert('发生错误，请稍后重试！');
+                        });
+                    });
+
+
+                    li.appendChild(a);
+                    li.appendChild(deleteButton);
+                    fileList.appendChild(li);
+                });
+
+                // 显示分页按钮
+                pagination.innerHTML = '';
+                // 创建分页连接
+                for(let i = 1; i <= data.total_pages; i++) {
+                    const pageLink = document.createElement('a');
+                    pageLink.textContent = i;
+                    pageLink.style.marginRight = '5px' // 按钮之间相邻距离
+                    pageLink.href = `/dashboard?page=${i}`;
+                    pagination.appendChild(pageLink);
+                }
+            });
+        }
+
+        // 获取当前页面的页数
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPage = urlParams.get('page') || 1; //如果URL中没有包含名为'page'的参数，则currentPage将被赋值为1。
+        
+        // 加载指定页数的文件按列表数据
+        loadFiles(currentPage);
+    });
+</script>
+</html>

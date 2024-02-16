@@ -1,0 +1,217 @@
+#pagination {
+    position: fixed; /* 固定分页按钮的位置 */
+    bottom: 50px; /* 底部距离 */
+    right: 120px; 
+    z-index: 999; /* 使分页按钮位于其他内容的上层 */
+}
+
+
+.deleteButton {
+    background-color: red;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    position: absolute;
+    right: 0;
+    }
+
+.deleteButton:hover {
+    background-color: #fff;
+    color: #1795bb;
+    border: 1px solid #ccc;
+    }
+
+/* 文件列表样式 */
+#fileList {
+    position: relative;
+}
+
+#fileList Li {
+    margin-bottom: 10px; /* 每个文件列表项添加底边边距 */
+    position: relative; /* 设置文件列表项相对定位，以便删除按钮相对定位 */
+}
+
+/* 调整文件名和删除按钮的布局 */
+#fileList a {
+    display: inline-block; /* 设置文件名为块级元素，以便与删除按钮并排 */
+    width: calc(100% - 100px); /* 计算文件名宽度，确保删除按钮有足够空间 */
+}
+
+.uploadButton {
+    background-color: rgba(0, 140, 255, 0.842);
+    border-radius: 12px;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    }
+
+.uploadButton img {
+    margin-right: 5px; /* 调整图片和按钮之间的间距 */
+    width: 20px; /* 设置图片宽度 */
+    height: 20px; /* 设置图片高度 */
+}
+
+.uploadButton:hover {
+    background-color: #f6ebeb;
+    color: #1795bb;
+    border: 1px solid #7a7979;
+    }
+
+.main {
+    border-radius: 35px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    float: right;
+    height: 550px;
+    width: 1300px;
+    margin-right: 85px; /* 调整右间距*/
+}
+    
+.logout-form {
+    margin-left: auto;
+    display: inline;
+}
+
+.niceButton3 {
+    background-color: red;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    }
+
+.niceButton3:hover {
+    background-color: #fff;
+    color: #1795bb;
+    border: 1px solid #ccc;
+    }
+
+.message-box {
+        background-color: wheat;
+        color: red;
+        font-size: 25px;
+        display: inline-block;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 25px;
+    }
+
+#content {
+    height: 550px;
+    width: 650px;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 60px; /* 指定字体大小，可以根据需要进行调整 */
+}
+
+#login {
+    border-radius: 35px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    float: right;
+    height: 500px;
+    width: 600px;
+    margin-right: 100px; /* 调整右间距*/
+}
+
+#footer {
+    height: 200px;
+    clear: both;
+    text-align: center;
+    font-size: 15px;
+    color: #EEEEEE;
+}
+
+#username,
+#password {
+    border-radius: 35px;
+    width: 300px;
+    height: 30px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}   
+
+input[type="text"],
+input[type="password"] {
+    border-radius: 35px;
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 300px;
+    text-align: center;
+}
+
+
+
+.button {
+    display: inline-block;
+    padding: 15px 50px;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;   
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color:rgb(0, 166, 255);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .button:hover {background-color: #3e7b8e}
+  
+  .button:active {
+    background-color: #3e8d8e;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+#regist {
+    border-radius: 35px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    float: right;
+    height: 750px;
+    width: 600px;
+    margin-right: 500px; /* 调整右间距*/
+}

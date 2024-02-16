@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: mysql 
+    environment: 
+      MYSQL_ROOT_PASSWORD: YiCloud*123456
+      MYSQL_DATABASE: cloud
+      MYSQL_USER: cloud
+      MYSQL_PASSWORD: YiCloud*123456
+    volumes:
+      - /root/data:/var/lib/mysql
+      - /root/init:/docker-entrypoint-initdb.d/
+  web:
+    image: reg.yiiong.top:8443/library/yicloud:1.1.1
+    volumes:
+      - /root/cloud/data:/YiCloud/data
+    ports:
+      - "6666:6666"
+    depends_on:
+      - db
+    environment:
+      - HOST=db:3306 
+      - USER=cloud 
+      - PASSWORD=YiCloud*123456 
+      - DATABASE=cloud

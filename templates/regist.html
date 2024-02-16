@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>regist</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+
+<style>
+
+    body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+
+<body>
+    <div id="title"></div>
+    <b><h1 style='color:aliceblue; font-size: 50px; margin-left: 40px;'>
+        <img src="../static/2.png" style="height: 60px; width: 60px;">
+        YiCloud
+        <a href="https://github.com/Beatrueman"><img src="../static/github.png" style="height: 60px; width: 60px; margin-left: 1050px;"></a>  
+    </h1></b>
+    <hr>
+    <div id="regist">
+        <b><h1 style="font-size: 40px; text-align: center; color: black;">开始注册您的YiCloud！</h1></b>
+        <hr>
+
+        <br>
+
+        <form action="/regist" method="post">
+            <!-- 账户名输入框 -->
+            <label for="username"><b>账户名</b></label>
+            <input type="text" id="username" name="username" required>
+            
+            <br>
+
+            <!-- 密码输入框 -->
+            <label for="password"><b>密码</b></label>
+            <input type="password" id="password" name="password" required>
+            <span id="password-hint" style="display:none;color:red;"><b>密码必须至少8个字符，包含至少一个大写字母、一个小写字母和一个特殊字符(@#$%&*)</b></span>
+
+            <script>
+            var passwordField = document.getElementById("password"); /* 获取password元素 */
+            var passwordHint = document.getElementById("password-hint"); /* 获取password-hint元素 */
+
+            /* 获得焦点时触发focus事件 */
+            passwordField.addEventListener("focus", function() {
+              passwordHint.style.display = "inline"; /* inline使密码要求提示信息显示出来 */
+            });
+
+            passwordField.addEventListener("blur", function() {
+              passwordHint.style.display = "none"; /* none使密码要求提示信息隐藏 */
+            });
+            </script>
+
+            <br>
+
+            <!-- 邮箱输入框 -->
+            <label for="password"><b>邮箱</b></label>
+            <input type="text" id="username" name="email" required>
+
+            <br>
+
+            <!-- 电话输入框 -->
+            <label for="password"><b>电话</b></label>
+            <input type="text" id="username" name="phone" required>
+
+            <br>
+
+            <button class="button">注册=></button>
+        </form>
+    </div>
+</body>
+</html>

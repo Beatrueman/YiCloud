@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>YiCloud-Save Everyhing</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+
+<body>
+    <div id="title"></div>
+    <b><h1 style='color:aliceblue; font-size: 50px; margin-left: 40px;'>
+        <img src="../static/2.png" style="height: 60px; width: 60px;">
+        YiCloud
+        {% if message %}
+            <p class="message-box">{{ message }}</p>
+        {% endif %}
+        <script>
+            // 获取错误信息元素
+            const messageElement = document.querySelector(".message-box"); // 使用 CSS 选择器来获取元素
+        
+            // 如果错误信息元素存在，则设置一个定时器，在一段时间后自动隐藏
+            if (messageElement) {
+                setTimeout(function() {
+                    messageElement.style.display = 'none';
+                }, 3000); // 3秒后隐藏
+            }
+        </script>
+        <a href="https://github.com/Beatrueman">
+            <img src="../static/github.png" style="height: 60px; width: 60px; margin-left: 1050px;" alt="GitHub Link">
+        </a>
+    </h1></b>
+    <hr>
+    <div id="login">
+        <b><h1 style="font-size: 40px; text-align: center;">登录到YiCloud</h1></b>
+        
+        <hr>
+        
+        <br>
+
+        <form action="/" method="post">
+            <!-- 账户名输入框 -->
+            <label for="username"><b>账户名</b></label>
+            <input type="text" id="username" name="username" required>
+            
+            <br>
+
+            <!-- 密码输入框 -->
+            <label for="password"><b>密码</b></label>
+            <input type="password" id="password" name="password" required>
+
+            <br>
+
+            <!-- 提交按钮 -->
+            <!-- <input type="submit" value="登录"> -->
+            <button class="button">登录</button>
+
+            <a href="/regist"><p>还没有账户？立即注册</p></a>
+        </form>
+    </div>
+    <div id="content">
+        <b>Save Everything<br>为您的数据而生</b>
+    </div>
+</body>
+    <div id="footer">
+        <span>Copyright © 2024 <span><a href="http://www.yiiong.top:88">Yiiong</a></span>. All rights reserved.</span>
+        <br>
+        <span>Version 1.0.0</span>
+    </div>
+</html>
