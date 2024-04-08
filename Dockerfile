@@ -2,7 +2,7 @@ FROM python
 
 COPY requirements.txt .
 RUN pip3 install mysqlclient cryptography 
-RUN pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 COPY . ./YiCloud
 
